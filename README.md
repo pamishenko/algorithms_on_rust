@@ -38,3 +38,32 @@ let mut high = sorted_array.len() - 1;
 
 ## Selection sort
 > Selection sort is a sorting algorithm that sequentially iterates through an array and at each iteration finds the minimum element, then swaps it with the first element of the array. Then the process is repeated for the subarray starting from the second element, and so on until the end of the array. This algorithm has a quadratic complexity of O(n^2) in the worst and average cases, but unlike bubble sort, it has a linear complexity of O(n) in the best case when the array is already sorted.
+
+implementation:
+
+```
+fn selection_sort(vec: &mut Vec<i32>) {
+    let mut new_vec: Vec<i32> = vec![];
+    for _i in 0..vec.len(){
+        let smallest_index = find_smallest(vec);
+        let smallest_item = vec[smallest_index];
+        new_vec.push(smallest_item);
+        vec.remove(smallest_index);
+    }
+    *vec = new_vec;
+}
+
+fn find_smallest(vec: &Vec<i32>) -> usize  {
+    let mut smallest = vec[0];
+    let mut smallest_id: usize = 0;
+    for i in 1..vec.len() {
+        if vec[i] < smallest {
+            smallest = vec[i];
+            smallest_id = smallest_id + 1;
+        }
+    }
+    smallest_id
+}
+```
+Function `selection_sort` sorts a mutable reference to a vector of integers using the selection sort algorithm. It creates an empty vector called `new_vec` to hold the sorted integers. It then iterates over the input vector using a for loop, finding the index of the smallest integer using the `find_smallest` function and storing the integer at that index in a variable called `smallest_item`. The integer is then pushed onto `new_vec`, and removed from the original vector using the remove method. Finally, vec is assigned to `new_vec`, so that the sorted integers replace the original unsorted integers. \
+Function `find_smallest` takes an immutable reference to a vector of integers, iterates over the vector with a for loop to find the index of the smallest integer, and returns that index.
